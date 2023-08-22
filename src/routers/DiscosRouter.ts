@@ -3,12 +3,10 @@ import { DiscosController } from "../controller/DiscosController";
 import { DiscosBusiness } from "../business/DiscosBusiness";
 import { DiscosDatabase } from "../databaseConection/DiscosDatabase";
 
-export const discosRouter = express.Router()
+export const discosRouter = express.Router();
 
 const discosController = new DiscosController(
-    new DiscosBusiness(
-        new DiscosDatabase()
-    )
-)
+  new DiscosBusiness(new DiscosDatabase())
+);
 
-discosRouter.get("/", discosController.getDiscos);
+discosRouter.get("/only", discosController.getOnlyDiscos);
