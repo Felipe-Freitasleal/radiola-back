@@ -1,16 +1,3 @@
-export interface DiscosFromDB {
-  id: number;
-  nome: string;
-  artista: string;
-  ano: number;
-  capa: string;
-  musicas: {
-    id: number;
-    nome: string;
-    duração: number;
-  };
-}
-
 export interface OnlyDiscosDB {
   id: number;
   nome: string;
@@ -22,7 +9,7 @@ export interface OnlyDiscosDB {
 export interface OnlyMusicasDB {
   id: number;
   nome: string;
-  duração: number;
+  duracao: number;
   compositor: string;
   disco_id: number;
 }
