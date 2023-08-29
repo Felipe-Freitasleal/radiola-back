@@ -4,12 +4,7 @@ export class DiscosModels {
     private nome: string,
     private artista: string,
     private ano: number,
-    private capa: string,
-    private musicas: {
-      id: number;
-      nome: string;
-      duração: number;
-    }
+    private capa: string
   ) {}
 
   public getId(): number {
@@ -52,17 +47,6 @@ export class DiscosModels {
     this.capa = value;
   }
 
-  public getToDB() {
-    return {
-      id: this.id,
-      nome: this.nome,
-      artista: this.artista,
-      ano: this.ano,
-      capa: this.capa,
-      musicas: this.musicas,
-    };
-  }
-
   public geOnlyDIscosDB() {
     return {
       id: this.id,
@@ -70,6 +54,66 @@ export class DiscosModels {
       artista: this.artista,
       ano: this.ano,
       capa: this.capa,
+    };
+  }
+}
+
+export class MusicasModels {
+  constructor(
+    private id: number,
+    private nome: string,
+    private duracao: number,
+    private compositor: string,
+    private disco_id: number
+  ) {}
+
+  public getId(): number {
+    return this.id;
+  }
+
+  public setId(value: number): void {
+    this.id = value;
+  }
+
+  public getNome(): string {
+    return this.nome;
+  }
+
+  public setNome(value: string): void {
+    this.nome = value;
+  }
+
+  public getArtist(): number {
+    return this.duracao;
+  }
+
+  public setArtista(value: number): void {
+    this.duracao = value;
+  }
+
+  public getAno(): string {
+    return this.compositor;
+  }
+
+  public setAno(value: string): void {
+    this.compositor = value;
+  }
+
+  public getCapa(): number {
+    return this.disco_id;
+  }
+
+  public setCapa(value: number): void {
+    this.disco_id = value;
+  }
+
+  public geOnlyMusicasDB() {
+    return {
+      id: this.id,
+      nome: this.nome,
+      duracao: this.duracao,
+      compositor: this.compositor,
+      disco_id: this.disco_id,
     };
   }
 }

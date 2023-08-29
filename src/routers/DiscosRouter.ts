@@ -10,3 +10,4 @@ const discosController = new DiscosController(
 );
 
 discosRouter.get("/only", discosController.getOnlyDiscos);
+discosRouter.get("/:id", discosController.getOnlyMusicas);
