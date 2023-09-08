@@ -1,4 +1,4 @@
-import { OnlyDiscosDB, OnlyMusicasDB } from "../types/Types";
+import { OnlyDiscosDB, OnlyMusicasDB, postAlbumToDB } from "../types/Types";
 import { DBConnection } from "./DBConnection";
 
 export class DiscosDatabase extends DBConnection {
@@ -12,8 +12,6 @@ export class DiscosDatabase extends DBConnection {
       .select("*")
       .from("discos");
 
-    console.log("discos: ", discos);
-
     return discos;
   };
 
@@ -25,5 +23,9 @@ export class DiscosDatabase extends DBConnection {
       .where("musicas.disco_id", "=", id);
 
     return musicas;
+  };
+
+  public postAlbum = async (album: postAlbumToDB) => {
+    await DBConnection.connection(DiscosDatabase.TABLE_DISCOS).insert(album);
   };
 }

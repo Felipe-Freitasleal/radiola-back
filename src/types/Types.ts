@@ -13,3 +13,10 @@ export interface OnlyMusicasDB {
   compositor: string;
   disco_id: number;
 }
+
+export interface postAlbumToDB {
+  nome: string;
+  artista: string;
+  ano: number;
+  capa: any;
+}

@@ -9,5 +9,6 @@ const discosController = new DiscosController(
   new DiscosBusiness(new DiscosDatabase())
 );
 
-discosRouter.get("/only", discosController.getOnlyDiscos);
-discosRouter.get("/:id", discosController.getOnlyMusicas);
+discosRouter.get("/all", discosController.getOnlyDiscos);
+discosRouter.get("/songs/:albumid", discosController.getOnlyMusicas);
+discosRouter.post("/", discosController.postAlbum);

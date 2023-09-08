@@ -32,4 +32,5 @@ app.get("/ping", (req, res) => {
     }
 });
 app.use("/discos", DiscosRouter_1.discosRouter);
+app.use("/musicas", DiscosRouter_1.discosRouter);
 //# sourceMappingURL=index.js.map

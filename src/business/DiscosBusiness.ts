@@ -1,6 +1,6 @@
 import { DiscosDatabase } from "../databaseConection/DiscosDatabase";
-import { MusicasModels } from "../models/DiscosModels";
-import { OnlyMusicasDB } from "../types/Types";
+import { MusicasModels, PostAlbumModel } from "../models/DiscosModels";
+import { OnlyMusicasDB, postAlbumToDB } from "../types/Types";
 
 export class DiscosBusiness {
   constructor(private discosDatabase: DiscosDatabase) {}
@@ -29,5 +29,13 @@ export class DiscosBusiness {
     });
 
     return musicas;
+  };
+
+  public postAlbum = async ({ nome, artista, ano, capa }: postAlbumToDB) => {
+    const newAlbum = new PostAlbumModel(nome, artista, ano, capa);
+
+    const albumModel = newAlbum.albumIntoDB();
+
+    const albumIntoDB = await this.discosDatabase.postAlbum(albumModel);
   };
 }

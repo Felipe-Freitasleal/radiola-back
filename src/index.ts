@@ -32,5 +32,4 @@ app.get("/ping", (req: Request, res: Response) => {
   }
 });
 
-app.use("/discos", discosRouter);
-app.use("/musicas", discosRouter);
+app.use("/album", discosRouter);
