@@ -12,3 +12,10 @@ export interface getDiscosFromDB {
   ano: number;
   capa: string;
 }
+
+export interface postSongs {
+  nome: string;
+  duracao: number;
+  compositor: string;
+  disco_id: number;
+}

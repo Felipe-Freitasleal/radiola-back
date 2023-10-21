@@ -103,3 +103,53 @@ export class GetAlbuns {
     };
   }
 }
+
+export class PostSongsModel {
+  constructor(
+    private nome: string,
+    private duracao: number,
+    private compositor: string,
+    private disco_id: number
+  ) {}
+
+  public getNome(): string {
+    return this.nome;
+  }
+
+  public setNome(value: string): void {
+    this.nome = value;
+  }
+
+  public getCompositor(): string {
+    return this.compositor;
+  }
+
+  public setCompositor(value: string): void {
+    this.compositor = value;
+  }
+
+  public getDuracao(): any {
+    return this.duracao;
+  }
+
+  public setDuracao(value: number): void {
+    this.duracao = value;
+  }
+
+  public getDiscos_id(): number {
+    return this.disco_id;
+  }
+
+  public setDiscos_id(value: number): void {
+    this.disco_id = value;
+  }
+
+  public songsIntoDB() {
+    return {
+      nome: this.nome,
+      duracao: this.duracao,
+      compositor: this.compositor,
+      disco_id: this.disco_id,
+    };
+  }
+}
