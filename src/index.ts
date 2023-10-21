@@ -16,7 +16,7 @@ app.listen(Number(process.env.PORT), () => {
 
 app.get("/ping", (req: Request, res: Response) => {
   try {
-    res.status(200).send("PONG!");
+    res.status(200).send("PONG!!!@@@!!!");
   } catch (error) {
     console.log(error);
 
