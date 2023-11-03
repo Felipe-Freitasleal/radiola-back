@@ -3,7 +3,7 @@ import {
   getSongsFromDB,
   postAlbumToDB,
   postSongs,
-} from "../types/Types";
+} from "../types/Types.js";
 import { DBConnection } from "./DBConnection";
 
 export class DiscosDatabase extends DBConnection {
