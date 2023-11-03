@@ -16,7 +16,7 @@ app.listen(Number(process.env.PORT), () => {
 });
 app.get("/ping", (req, res) => {
     try {
-        res.status(200).send("PONG!");
+        res.status(200).send("PONG!!!@@@!!!");
     }
     catch (error) {
         console.log(error);
@@ -31,5 +31,5 @@ app.get("/ping", (req, res) => {
         }
     }
 });
-app.use("/discos", DiscosRouter_1.discosRouter);
+app.use("/album", DiscosRouter_1.discosRouter);
 //# sourceMappingURL=index.js.map

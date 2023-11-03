@@ -1,4 +1,11 @@
-export interface OnlyDiscosDB {
+export interface postAlbumToDB {
+  nome: string;
+  artista: string;
+  ano: number;
+  capa: string;
+}
+
+export interface getDiscosFromDB {
   id: number;
   nome: string;
   artista: string;
@@ -6,7 +13,14 @@ export interface OnlyDiscosDB {
   capa: string;
 }
 
-export interface OnlyMusicasDB {
+export interface postSongs {
+  nome: string;
+  duracao: number;
+  compositor: string;
+  disco_id: number;
+}
+
+export interface getSongsFromDB {
   id: number;
   nome: string;
   duracao: number;

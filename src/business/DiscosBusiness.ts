@@ -1,33 +1,86 @@
 import { DiscosDatabase } from "../databaseConection/DiscosDatabase";
-import { MusicasModels } from "../models/DiscosModels";
-import { OnlyMusicasDB } from "../types/Types";
+import {
+  GetAlbuns,
+  GetSongsModel,
+  PostAlbumModel,
+  PostSongsModel,
+} from "../models/DiscosModels";
+import {
+  getDiscosFromDB,
+  getSongsFromDB,
+  postAlbumToDB,
+  postSongs,
+} from "../types/Types";
 
 export class DiscosBusiness {
   constructor(private discosDatabase: DiscosDatabase) {}
 
   // métodos
-  public getOnlyDiscos = async () => {
-    const getDiscoInDB: any = await this.discosDatabase.getOnlyDiscosDB();
+  public postAlbumModel = async ({
+    nome,
+    artista,
+    ano,
+    capa,
+  }: postAlbumToDB) => {
+    const newAlbum = new PostAlbumModel(nome, artista, ano, capa);
 
-    return getDiscoInDB;
+    const albumModel = newAlbum.albumIntoDB();
+
+    await this.discosDatabase.postAlbumIntoDB(albumModel);
   };
 
-  public getOnlyMusicas = async (id: number) => {
-    const getMusicasInDB: OnlyMusicasDB[] | undefined =
-      await this.discosDatabase.getOnlyMusicasInDB(id);
+  public getAllDiscos = async () => {
+    const getDiscos = await this.discosDatabase.getAllDiscos();
 
-    const musicas = getMusicasInDB.map((musica) => {
-      const musicaFromDB = new MusicasModels(
-        musica.id,
-        musica.nome,
-        musica.duracao,
-        musica.compositor,
-        musica.disco_id
+    const verifyDiscos = getDiscos.map((disco: getDiscosFromDB) => {
+      const d = new GetAlbuns(
+        disco.id,
+        disco.nome,
+        disco.artista,
+        disco.ano,
+        disco.capa
       );
 
-      return musicaFromDB.geOnlyMusicasDB();
+      return d;
     });
 
-    return musicas;
+    return verifyDiscos;
+  };
+
+  public postSongsModel = async (songs: postSongs[]) => {
+    const modelSongs = songs.map((song) => {
+      const s = new PostSongsModel(
+        song.nome,
+        song.duracao,
+        song.compositor,
+        song.disco_id
+      );
+
+      const songsModel = s.songsIntoDB();
+      return songsModel;
+    });
+
+    await this.discosDatabase.postSongsIntoDB(modelSongs);
+  };
+
+  public getSongsBusiness = async (id: string) => {
+    const songList: getSongsFromDB[] = await this.discosDatabase.getSongsFromDb(
+      id
+    );
+
+    const songs = songList.map((song) => {
+      const s = new GetSongsModel(
+        song.id,
+        song.nome,
+        song.duracao,
+        song.compositor,
+        song.disco_id
+      );
+
+      const songsModel = s.songsFromDB();
+      return songsModel;
+    });
+
+    return songs;
   };
 }

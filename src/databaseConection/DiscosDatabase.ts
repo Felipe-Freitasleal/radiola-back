@@ -1,29 +1,45 @@
-import { OnlyDiscosDB, OnlyMusicasDB } from "../types/Types";
+import {
+  getDiscosFromDB,
+  getSongsFromDB,
+  postAlbumToDB,
+  postSongs,
+} from "../types/Types";
 import { DBConnection } from "./DBConnection";
 
 export class DiscosDatabase extends DBConnection {
   public static TABLE_DISCOS = "discos";
   public static TABLE_MUSICAS = "musicas";
 
-  public getOnlyDiscosDB = async () => {
-    const discos: OnlyDiscosDB[] = await DBConnection.connection(
-      DiscosDatabase.TABLE_DISCOS
-    )
-      .select("*")
-      .from("discos");
-
-    console.log("discos: ", discos);
-
-    return discos;
+  public postAlbumIntoDB = async (album: postAlbumToDB) => {
+    await DBConnection.connection(DiscosDatabase.TABLE_DISCOS).insert(album);
   };
 
-  public getOnlyMusicasInDB = async (id: number) => {
-    const musicas: OnlyMusicasDB[] = await DBConnection.connection(
+  public getAllDiscos = async () => {
+    const getDiscos: getDiscosFromDB[] = await DBConnection.connection(
+      DiscosDatabase.TABLE_DISCOS
+    ).select();
+
+    console.log("getDiscos from DB: ", getDiscos);
+
+    return getDiscos;
+  };
+
+  public postSongsIntoDB = async (songsList: postSongs[]) => {
+    for (let i = 0; songsList.length > i; i++) {
+      const songs: postSongs = songsList[i];
+      await DBConnection.connection(DiscosDatabase.TABLE_MUSICAS).insert(songs);
+    }
+  };
+
+  public getSongsFromDb = async (id: string) => {
+    const getSongs: getSongsFromDB[] = await DBConnection.connection(
       DiscosDatabase.TABLE_MUSICAS
     )
       .select()
-      .where("musicas.disco_id", "=", id);
+      .where("disco_id", "=", `${Number(id)}`);
 
-    return musicas;
+    // console.log("getSongs: ", getSongs);
+
+    return getSongs;
   };
 }
