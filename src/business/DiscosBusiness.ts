@@ -1,10 +1,16 @@
 import { DiscosDatabase } from "../databaseConection/DiscosDatabase";
 import {
   GetAlbuns,
+  GetSongsModel,
   PostAlbumModel,
   PostSongsModel,
 } from "../models/DiscosModels";
-import { getDiscosFromDB, postAlbumToDB, postSongs } from "../types/Types";
+import {
+  getDiscosFromDB,
+  getSongsFromDB,
+  postAlbumToDB,
+  postSongs,
+} from "../types/Types";
 
 export class DiscosBusiness {
   constructor(private discosDatabase: DiscosDatabase) {}
@@ -55,5 +61,26 @@ export class DiscosBusiness {
     });
 
     await this.discosDatabase.postSongsIntoDB(modelSongs);
+  };
+
+  public getSongsBusiness = async (id: string) => {
+    const songList: getSongsFromDB[] = await this.discosDatabase.getSongsFromDb(
+      id
+    );
+
+    const songs = songList.map((song) => {
+      const s = new GetSongsModel(
+        song.id,
+        song.nome,
+        song.duracao,
+        song.compositor,
+        song.disco_id
+      );
+
+      const songsModel = s.songsFromDB();
+      return songsModel;
+    });
+
+    return songs;
   };
 }

@@ -32,4 +32,6 @@ discosRouter.post(
 
 discosRouter.get("/", discosController.getAllDiscos);
 
-discosRouter.post("/songs", discosController.postSongs);
+discosRouter.post("/newSongs", discosController.postSongs);
+
+discosRouter.get("/songs/:id", discosController.getSongs);

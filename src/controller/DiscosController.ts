@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { DiscosBusiness } from "../business/DiscosBusiness";
-import { postSongs } from "../types/Types";
+import { getSongsFromDB, postSongs } from "../types/Types";
 
 export class DiscosController {
   constructor(private discosBusiness: DiscosBusiness) {}
@@ -85,12 +85,7 @@ export class DiscosController {
       const songs: postSongs[] = req.body;
 
       for (let i = 0; songs.length > i; i++) {
-        if (
-          !songs[i].nome ||
-          !songs[i].duracao ||
-          !songs[i].compositor ||
-          !songs[i].disco_id
-        ) {
+        if (!songs[i].nome || !songs[i].duracao || !songs[i].disco_id) {
           res.status(400);
           throw new Error(
             "Nome, compositor, duração e id do disco são obrigatórios!"
@@ -129,6 +124,29 @@ export class DiscosController {
         res.send(error.message);
       } else {
         res.send("Erro inesperado.");
+      }
+    }
+  };
+
+  public getSongs = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      if (typeof id !== "string") throw new Error("O id deve ser uma string.");
+
+      const output = await this.discosBusiness.getSongsBusiness(id);
+
+      if (!output) throw new Error();
+
+      res.status(200).send(output);
+    } catch (error) {
+      console.log(error);
+
+      if (res.statusCode === 200) res.status(500);
+      if (error instanceof Error) {
+        res.send(error.message);
+      } else {
+        res.send("Erro inesperado!");
       }
     }
   };

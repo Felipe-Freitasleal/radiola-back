@@ -1,4 +1,9 @@
-import { getDiscosFromDB, postAlbumToDB, postSongs } from "../types/Types";
+import {
+  getDiscosFromDB,
+  getSongsFromDB,
+  postAlbumToDB,
+  postSongs,
+} from "../types/Types";
 import { DBConnection } from "./DBConnection";
 
 export class DiscosDatabase extends DBConnection {
@@ -24,5 +29,17 @@ export class DiscosDatabase extends DBConnection {
       const songs: postSongs = songsList[i];
       await DBConnection.connection(DiscosDatabase.TABLE_MUSICAS).insert(songs);
     }
+  };
+
+  public getSongsFromDb = async (id: string) => {
+    const getSongs: getSongsFromDB[] = await DBConnection.connection(
+      DiscosDatabase.TABLE_MUSICAS
+    )
+      .select()
+      .where("disco_id", "=", `${Number(id)}`);
+
+    // console.log("getSongs: ", getSongs);
+
+    return getSongs;
   };
 }

@@ -19,3 +19,11 @@ export interface postSongs {
   compositor: string;
   disco_id: number;
 }
+
+export interface getSongsFromDB {
+  id: number;
+  nome: string;
+  duracao: number;
+  compositor: string;
+  disco_id: number;
+}
