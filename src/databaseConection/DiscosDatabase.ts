@@ -19,8 +19,6 @@ export class DiscosDatabase extends DBConnection {
       DiscosDatabase.TABLE_DISCOS
     ).select();
 
-    console.log("getDiscos from DB: ", getDiscos);
-
     return getDiscos;
   };
 
@@ -37,8 +35,6 @@ export class DiscosDatabase extends DBConnection {
     )
       .select()
       .where("disco_id", "=", `${Number(id)}`);
-
-    // console.log("getSongs: ", getSongs);
 
     return getSongs;
   };

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { DiscosBusiness } from "../business/DiscosBusiness";
-import { getSongsFromDB, postSongs } from "../types/Types";
+import { postSongs } from "../types/Types";
 
 export class DiscosController {
   constructor(private discosBusiness: DiscosBusiness) {}

@@ -1,6 +1,5 @@
 import express from "express";
 import multer from "multer";
-// import path from "path";
 import { DiscosController } from "../controller/DiscosController";
 import { DiscosBusiness } from "../business/DiscosBusiness";
 import { DiscosDatabase } from "../databaseConection/DiscosDatabase";
@@ -8,7 +7,6 @@ import path from "path";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // const destinationPath = path.join(__dirname, "/src/covers");
     cb(null, "./src/covers");
   },
   filename: function (req, file, cb) {
