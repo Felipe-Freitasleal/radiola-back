@@ -11,6 +11,8 @@ export class DiscosController {
     const artista = req.body.artista;
     const ano = req.body.ano;
     const file = req.file;
+    const genero = req.body.genero;
+    const preco = req.body.preco;
 
     console.log("Info: ", nome, artista, ano, file);
     try {
@@ -41,11 +43,20 @@ export class DiscosController {
         }
       }
 
+      if (genero !== undefined) {
+        if (typeof genero !== "string") {
+          res.status(400);
+          throw new Error("O genero deve ser uma string");
+        }
+      }
+
       await this.discosBusiness.postAlbumModel({
         nome,
         artista,
         ano,
         capa: file.path,
+        genero,
+        preco,
       });
 
       res.status(201).send({ message: "Disco criado com sucesso!" });

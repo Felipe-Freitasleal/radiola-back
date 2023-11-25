@@ -21,8 +21,17 @@ export class DiscosBusiness {
     artista,
     ano,
     capa,
+    genero,
+    preco,
   }: postAlbumToDB) => {
-    const newAlbum = new PostAlbumModel(nome, artista, ano, capa);
+    const newAlbum = new PostAlbumModel(
+      nome,
+      artista,
+      ano,
+      capa,
+      genero,
+      preco
+    );
 
     const albumModel = newAlbum.albumIntoDB();
 
@@ -38,7 +47,9 @@ export class DiscosBusiness {
         disco.nome,
         disco.artista,
         disco.ano,
-        disco.capa
+        disco.capa,
+        disco.genero,
+        disco.preco
       );
 
       return d;

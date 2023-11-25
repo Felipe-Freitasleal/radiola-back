@@ -3,6 +3,8 @@ export interface postAlbumToDB {
   artista: string;
   ano: number;
   capa: string;
+  genero: string;
+  preco: number;
 }
 
 export interface getDiscosFromDB {
@@ -11,6 +13,8 @@ export interface getDiscosFromDB {
   artista: string;
   ano: number;
   capa: string;
+  genero: string;
+  preco: number;
 }
 
 export interface postSongs {
