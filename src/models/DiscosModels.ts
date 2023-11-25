@@ -3,7 +3,9 @@ export class PostAlbumModel {
     private nome: string,
     private artista: string,
     private ano: number,
-    private capa: string
+    private capa: string,
+    private genero: string,
+    private preco: number
   ) {}
 
   public getNome(): string {
@@ -38,12 +40,30 @@ export class PostAlbumModel {
     this.ano = value;
   }
 
+  public getGenero(): string {
+    return this.genero;
+  }
+
+  public setGenero(value: string): void {
+    this.genero = value;
+  }
+
+  public getPreco(): number {
+    return this.preco;
+  }
+
+  public setPreco(value: number): void {
+    this.preco = value;
+  }
+
   public albumIntoDB() {
     return {
       nome: this.nome,
       artista: this.artista,
       ano: this.ano,
       capa: this.capa,
+      genero: this.genero,
+      preco: this.preco,
     };
   }
 }
@@ -54,7 +74,9 @@ export class GetAlbuns {
     private nome: string,
     private artista: string,
     private ano: number,
-    private capa: string
+    private capa: string,
+    private genero: string,
+    private preco: number
   ) {}
 
   public getId(): number {
@@ -93,6 +115,22 @@ export class GetAlbuns {
     this.ano = value;
   }
 
+  public getGenero(): string {
+    return this.genero;
+  }
+
+  public setGenero(value: string): void {
+    this.genero = value;
+  }
+
+  public getPreco(): number {
+    return this.preco;
+  }
+
+  public setPreco(value: number): void {
+    this.preco = value;
+  }
+
   public albumFromDB() {
     return {
       id: this.id,
@@ -100,6 +138,8 @@ export class GetAlbuns {
       artista: this.artista,
       ano: this.ano,
       capa: this.capa,
+      genero: this.genero,
+      preco: this.preco,
     };
   }
 }

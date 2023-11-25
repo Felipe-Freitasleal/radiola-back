@@ -3,15 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export abstract class DBConnection{
-    protected static connection = knex({
-        client: 'mysql',
-        connection: {
-          host : 'localhost',
-          port : 3306,
-          user : 'root',
-          password : process.env.DB_PASSWORD,
-          database : 'radiola_back'
-        },
-    });
+export abstract class DBConnection {
+  protected static connection = knex({
+    client: process.env.CLIENT,
+    connection: {
+      host: process.env.HOST,
+      port: Number(process.env.DB_PORT),
+      user: process.env.USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB,
+    },
+  });
 }
