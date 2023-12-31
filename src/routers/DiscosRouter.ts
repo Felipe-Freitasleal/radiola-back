@@ -33,3 +33,5 @@ discosRouter.get("/", discosController.getAllDiscos);
 discosRouter.post("/newSongs", discosController.postSongs);
 
 discosRouter.get("/songs/:id", discosController.getSongs);
+
+discosRouter.get("/capa/:id", discosController.getCover);
