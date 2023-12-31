@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { DiscosBusiness } from "../business/DiscosBusiness";
 import { postSongs } from "../types/Types";
+import path from "path";
+import fs from "fs";
 
 export class DiscosController {
   constructor(private discosBusiness: DiscosBusiness) {}
@@ -14,7 +16,6 @@ export class DiscosController {
     const genero = req.body.genero;
     const preco = req.body.preco;
 
-    console.log("Info: ", nome, artista, ano, file);
     try {
       if (nome === undefined || artista === undefined || ano === undefined) {
         res.status(400);
@@ -159,6 +160,31 @@ export class DiscosController {
       } else {
         res.send("Erro inesperado!");
       }
+    }
+  };
+
+  public getCover = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      console.log("filePath id: ", id);
+
+      const file = path.resolve("src/covers/" + id);
+      console.log("file:  ", file);
+
+      if (!fs.existsSync(file)) {
+        res.status(404).send("Imagem não encontrada");
+        return;
+      }
+
+      const imageBuffer = fs.readFileSync(file);
+      const imageBase64 = Buffer.from(imageBuffer).toString("base64");
+      // console.log("imageBase64: ", imageBase64);
+
+      res.setHeader("Content-Type", "image/jpg");
+      res.send(imageBase64);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Erro interno do servidor");
     }
   };
 }
