@@ -1,4 +1,4 @@
-# **API de um E-Commerce de Discos** ![Discos](./e-commerce/assets/vinil.png)
+# **API E-Commerce de Discos** ![Discos](./e-commerce/assets/vinil.png)
 
 API desenvolvida em NodeJs como BFF (back-end from front-end) para gerênciamento e fornecimento de dados de um banco de dados MySQL para um front-end de uma loja virtual de discos de vinil.
 
